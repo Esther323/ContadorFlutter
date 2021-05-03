@@ -7,14 +7,16 @@ class _HomePageState extends State<HomePage> {//coloque el mouse y puse ctrl+.pa
                                               //funcion de setState
   final estiloTexto = new TextStyle(fontSize: 32);
 
-  int contador = 0;//se coloco una variable de tipo entero que es contador
+  int contador = 0;
+
+ //se coloco una variable de tipo entero que es contador
   
  void sumar(){//coloque la funcion de sumar
    contador++;
    print(contador);//mediante esta funcion mande a llamar al contador
  }
  void restar(){//coloque la funcion de restar
-   contador-=1;
+   contador--;
     print(contador);//mande a llamar al contador
  }
   @override
@@ -80,20 +82,54 @@ class _HomePageState extends State<HomePage> {//coloque el mouse y puse ctrl+.pa
                   
                 },
               ),
+            ),
+
+
+            new BottomNavigationBarItem(//agregue un boton de restar
+              label: "Refrescar",
+              icon: new IconButton(
+                icon: new Icon(Icons.refresh),//coloque su icono de restar
+                onPressed: (){
+                     setState(() {
+                          //COLOQUE LA FUNCION DE setState y dentro 
+                           contador=0;          //coloque el contador++;
+                        });
+                  
+                },
+              ),
             )
+            
           ],
         ),
+
+        
         floatingActionButton: FloatingActionButton(
          child: Icon(Icons.cancel),//coloque el icono de cancelar y volver a cero
-        onPressed: () {
-            setState(() {
-              contador=0;  
-                        });
+        onPressed:  (){
+                       Navigator.push(
+context, MaterialPageRoute(builder: (opcion)=> MyApp(context),
+)
+                       );
+                     }
             
-          }
+          
         ),
 
       ),
+    );
+  }
+}
+class MyApp extends StatelessWidget {
+   final opcion;
+
+  MyApp(this.opcion);
+  Widget build(opcion) {
+    return MaterialApp(
+
+       home: Center(
+         child: Text('Hola Mundo del 15701'),
+       ), 
+
     );
   }
 }
